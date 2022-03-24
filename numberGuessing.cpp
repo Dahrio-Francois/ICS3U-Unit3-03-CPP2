@@ -7,20 +7,32 @@
 
 #include <iostream>
 
+#include <random>
+
 
 int main() {
     // this function makes the game
-    const int NUMBER = 7;
+    int someRandomNumber;
     int guess;
+
+
+    std::random_device rseed;
+
+    std::mt19937 rgen(rseed());  // mersenne_twister
+
+    std::uniform_int_distribution<int> idist(0, 9);  // [0,9]
+
+    someRandomNumber = idist(rgen);
 
     // input
     std::cout << "Enter your guess (between 0 & 9): ";
     std::cin >> guess;
 
     // process
-    if (guess != NUMBER) {
-        std::cout << "\nIncorrect! Try again?";
-        std::cout << "\n\nDone";
+    if (guess != someRandomNumber) {
+        std::cout << "\nIncorrect!";
+        std::cout << " The random number was " << someRandomNumber << std::endl;
+        std::cout << "\nDone";
     } else {
         std::cout << "\nCorrect! You guessed the right number!";
         std::cout << "\n\nDone";
